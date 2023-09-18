@@ -214,7 +214,11 @@ function session(options) {
     req.sessionStore = store;
 
     // get the session ID from the cookie
-    var cookieId = req.sessionID = getcookie(req, name, secrets);
+    try {
+      var cookieId = req.sessionID = getcookie(req, name, secrets);
+    } catch(err) {
+      return next(err);
+    }
 
     // set-cookie
     onHeaders(res, function(){
@@ -544,6 +548,10 @@ function getcookie(req, name, secrets) {
         if (val === false) {
           debug('cookie signature invalid');
           val = undefined;
+          var err = new Error();
+          err.name = 'lderror';
+          err.id = 1029;
+          throw err;
         }
       } else {
         debug('cookie unsigned')

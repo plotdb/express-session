@@ -1,3 +1,12 @@
+# @plotdb/express-session
+
+*Note* This is a experimental fork from original express-session, trying to solve mysterious user session issue.
+
+It does one simple thing: throw an exception (duck-typed lderror 1029) when invalid signature is detected.
+
+Following are the original README from expression-session.
+
+
 # express-session
 
 [![NPM Version][npm-version-image]][npm-url]
